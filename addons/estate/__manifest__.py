@@ -1,4 +1,4 @@
 {
     'name': "Real Estate",
-    'depends': ['base']
+    'depends': ['base'],
 }
