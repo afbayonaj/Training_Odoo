@@ -9,13 +9,16 @@ class EstateProperty(models.Model):
     _description = "Real estate services"
     #_order = "sequence"
     
-    name = fields.Char(required=True)
+    name = fields.Char(required=True, default="Unknown")
     description = fields.Text()
     postcode = fields.Char()
-    date_availability = fields.Date()
+    #date_availability = fields.Date(copy=False, default=lambda self: (fields.Datetime.now() + fields.timedelta(days=90)).strftime('%Y-%m-%d'))
+    #date_availability = fields.Date(copy=False, default=lambda self: (fields.Datetime.now() + fields.timedelta(days=90)))
+    #date_availability = fields.Date(copy=False, default=fields.Datetime.now() + fields.timedelta(days=90))
+    date_availability = fields.Date(copy=False, default=lambda self: fields.Datetime.now())
     expected_price = fields.Float(required=True)
-    selling_price = fields.Float()
-    bedrooms = fields.Integer()
+    selling_price = fields.Float(copy=False, readonly=True)
+    bedrooms = fields.Integer(default=2)
     living_area = fields.Integer()
     facades = fields.Integer()
     garage = fields.Boolean()
@@ -25,6 +28,15 @@ class EstateProperty(models.Model):
         string='Type',
         selection=[('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')]
     )
+    active = fields.Boolean(default=True)
+    state = fields.Selection(
+        required=True,
+        default='new',
+        copy=False,
+        string='Status',
+        selection=[('new', 'New'), ('offer received', 'Offer Received'), ('offer Accepted', 'Offer Accepted'), ('sold and canceled', 'Sold and Canceled')]
+    )
+    last_seen = fields.Datetime("Last Seen", default=lambda self: fields.Datetime.now())
 
 
     """
