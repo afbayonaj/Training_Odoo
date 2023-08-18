@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import fields, models, api
+from odoo import fields, models
 
 
 class EstateProperty(models.Model):
@@ -39,9 +39,10 @@ class EstateProperty(models.Model):
     )
     last_seen = fields.Datetime("Last Seen", default=lambda self: fields.Datetime.now())
     property_type_id = fields.Many2one("estate.property.type", string="Property Type")
-    #seller = fields.Many2one('res.users', string='Salesman', index=True, tracking=True, default=lambda self: self.env.user)
-    #buyer = fields.Many2one('res.partner', string='Buyer', index=True, tracking=True, default=lambda self: self.env.user)
-    #property_type_id = fields.Char()
+    seller = fields.Many2one('res.users', string='Salesman', index=True, tracking=True, default=lambda self: self.env.user)
+    buyer = fields.Many2one('res.partner', string='Buyer', copy=False, index=True, tracking=True, default=lambda self: self.env.ref('base.partner_root'))
+    tag_ids = fields.Many2many("estate.property.tag", string="Tags")
+    offer_ids = fields.One2many("estate.property.offer", "property_id", string="Property Offer")
     #user_id = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True, default=lambda self: self.env.user)
 
     """

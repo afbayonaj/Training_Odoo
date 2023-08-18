@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Menu -->
+    <!-- 
+      id: Se puede utilizar para hacer referencia al registro (sin conocer 
+      su identificador en la base de datos).
+
+      model: tiene un valor fijo de ir.actions.act_window.
+
+      name: Es el nombre de la accion.
+
+      res_model: Es el model al que se aplica la accion.
+
+      view_mode: son las vistas que estarán disponibles; en este caso son 
+      las vistas de lista (árbol) y formulario. Veremos más adelante que 
+      puede haber otros modos de visualización. 
+    -->
+    <record id="estate_property_tag_action" model="ir.actions.act_window">
+        <field name="name">Property Tag</field>
+        <field name="res_model">estate.property.tag</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
