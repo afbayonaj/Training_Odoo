@@ -5,7 +5,8 @@
         <field name="name">estate.property.type.tree.views</field>
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
-            <tree string="Aqui que pongo">
+            <tree string="Estate Property Type">
+                <field name="name" string="Name"/>
             </tree>
         </field>
     </record>

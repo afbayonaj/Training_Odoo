@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real estate services"
+    #_inherit = ['estate.property.type']
     #_order = "sequence"
     
     name = fields.Char(required=True, default="Unknown")
@@ -37,10 +38,10 @@ class EstateProperty(models.Model):
         selection=[('new', 'New'), ('offer received', 'Offer Received'), ('offer Accepted', 'Offer Accepted'), ('sold and canceled', 'Sold and Canceled')]
     )
     last_seen = fields.Datetime("Last Seen", default=lambda self: fields.Datetime.now())
-    property_type = fields.Many2one()
-    seller = fields.Many2one('res.users', string='Salesman', index=True, tracking=True, default=lambda self: self.env.user)
-    buyer = fields.Many2one('res.partner', string='Buyer', index=True, tracking=True, default=lambda self: self.env.user)
-    property_type_id = fields.Char()
+    property_type_id = fields.Many2one("estate.property.type", string="Property Type")
+    #seller = fields.Many2one('res.users', string='Salesman', index=True, tracking=True, default=lambda self: self.env.user)
+    #buyer = fields.Many2one('res.partner', string='Buyer', index=True, tracking=True, default=lambda self: self.env.user)
+    #property_type_id = fields.Char()
     #user_id = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True, default=lambda self: self.env.user)
 
     """
