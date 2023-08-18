@@ -8,10 +8,16 @@
             <form string="Test">
                 <sheet>
                     <h1>My new house</h1>
-                    <field name="postcode" string="Postcode"/>
-                    <field name="date_availability" string="Available From"/>
-                    <field name="expected_price" string="Expected Price"/>
-                    <field name="selling_price" string="Selling Price"/>                  
+                    <group>
+                        <group>
+                            <field name="postcode" string="Postcode"/>
+                            <field name="date_availability" string="Available From"/>
+                        </group> 
+                        <group>
+                            <field name="expected_price" string="Expected Price"/>
+                            <field name="selling_price" string="Selling Price"/> 
+                        </group> 
+                    </group>               
                     
 
                     <sheet>
@@ -21,12 +27,13 @@
                                 <group>
                                     <field name="description"/>
                                     <field name="bedrooms"/>
-                                    <field name="living_area"/>
+                                    <field name="living_area" string="Living Area (sqm)"/>
                                     <field name="facades"/>
                                     <field name="garage"/>
                                     <field name="garden"/>
-                                    <field name="garden_area"/>
+                                    <field name="garden_area" string="Garden Area (sqm)"/>
                                     <field name="garden_orientation"/>
+                                    <field name="state"/> <!-- Este campo no se pide que se muestre -->
                                 </group>
                             </page>
                             
@@ -40,9 +47,9 @@
                             -->
                         </notebook>
                     </sheet>
-                    <div>
+                    <!-- <div>
                         <button string="Guardar" type="object" name="action_guardar" class="btn-primary"/>
-                    </div>
+                    </div> -->
                 </sheet>
             </form>
         </field>
