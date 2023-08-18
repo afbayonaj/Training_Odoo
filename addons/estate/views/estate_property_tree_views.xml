@@ -15,6 +15,9 @@
                 <separator/>
                 <filter string="Active" name="active" domain="[('active', '=', False)]"/>
                 <filter string="Available Properties" name="state" domain="['|',('state', '=', 'new'), ('state', '=', 'offer received')]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Post Code" name="postcode" context="{'group_by':'postcode'}"/>
+                </group>
             </search>
         </field>
     </record>

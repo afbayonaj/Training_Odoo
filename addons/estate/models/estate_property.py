@@ -37,7 +37,11 @@ class EstateProperty(models.Model):
         selection=[('new', 'New'), ('offer received', 'Offer Received'), ('offer Accepted', 'Offer Accepted'), ('sold and canceled', 'Sold and Canceled')]
     )
     last_seen = fields.Datetime("Last Seen", default=lambda self: fields.Datetime.now())
-
+    property_type = fields.Many2one()
+    seller = fields.Many2one('res.users', string='Salesman', index=True, tracking=True, default=lambda self: self.env.user)
+    buyer = fields.Many2one('res.partner', string='Buyer', index=True, tracking=True, default=lambda self: self.env.user)
+    property_type_id = fields.Char()
+    #user_id = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True, default=lambda self: self.env.user)
 
     """
     name = fields.Char('Plan Name', required=True, translate=True)
@@ -50,3 +54,4 @@ class EstateProperty(models.Model):
         ('check_number_of_months', 'CHECK(number_of_months >= 0)', 'The number of month can\'t be negative.'),
     ]
     """
+    

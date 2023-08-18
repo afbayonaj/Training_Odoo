@@ -16,20 +16,9 @@
       las vistas de lista (árbol) y formulario. Veremos más adelante que 
       puede haber otros modos de visualización. 
     -->
-    <record id="estate_property_action" model="ir.actions.act_window">
-        <field name="name">Properties</field>
-        <field name="res_model">estate.property</field>
+    <record id="estate_property_type_action" model="ir.actions.act_window">
+        <field name="name">Property Types</field>
+        <field name="res_model">estate.property.type</field>
         <field name="view_mode">tree,form</field>
-        <!--
-        <field name="help" type="html">
-          <p class="o_view_nocontent_smiling_face">
-            Define a new lost reason
-          </p><p>
-            Use lost reasons to explain why an opportunity is lost.
-          </p><p>
-            Some examples of lost reasons: "We don't have people/skill", "Price too high"
-          </p>
-        </field>
-        -->
     </record>
 </odoo>

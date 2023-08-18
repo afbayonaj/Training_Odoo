@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="estate_property_form_view" model="ir.ui.view">
-        <field name="name">estate.property.form.view</field>
-        <field name="model">estate.property</field>
+    <record id="estate_property_type_form_view" model="ir.ui.view">
+        <field name="name">estate.property.type.form.view</field>
+        <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
-            <form string="Test">
+            <form string="Property Type">
                 <sheet>
-                    <h1>My new house</h1>
+                    <h1>House</h1>
                     <group>
                         <group>
-                            <field name="property_type" string="Property Type"/>
-                            <field name="postcode" string="Postcode"/>
+                            <field name="name" string="Name"/>
                             <field name="date_availability" string="Available From"/>
                         </group> 
                         <group>
@@ -38,19 +37,16 @@
                                 </group>
                             </page>
                             
-                            <!-- Pestaña 2 -->
-                            <page string="Other Info">
+                            <!-- Pestaña 2
+                            <page string="Pestaña 2">
                                 <group>
-                                    <field name="seller" string="Salesman"/>
-                                    <field name="buyer" string="Buyer"/>
+                                    <field name="age"/>
+                                    <field name="email"/>
                                 </group>
                             </page>
-                            
+                            -->
                         </notebook>
                     </sheet>
-                    <!-- <div>
-                        <button string="Guardar" type="object" name="action_guardar" class="btn-primary"/>
-                    </div> -->
                 </sheet>
             </form>
         </field>
