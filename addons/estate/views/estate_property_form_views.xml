@@ -8,6 +8,7 @@
             <form string="Test">
                 <sheet>
                     <h1>My new house</h1>
+                    <field name="name"/> <!-- add -->
                     <!-- <field name="tag_ids" widget="many2many_tags"/> -->
                     <group>
                         <group>
@@ -17,6 +18,7 @@
                         </group> 
                         <group>
                             <field name="expected_price" string="Expected Price"/>
+                            <field name="best_price" string="Best Offer"/>
                             <field name="selling_price" string="Selling Price"/> 
                         </group> 
                     </group>               
@@ -35,15 +37,17 @@
                                     <field name="garden"/>
                                     <field name="garden_area" string="Garden Area (sqm)"/>
                                     <field name="garden_orientation"/>
-                                    <field name="state"/> <!-- Este campo no se pide que se muestre -->
+                                    <field name="state"/> <!-- add -->
+                                    <field name="total_area"/>
+                                    <field name="active" string="Active"/> <!-- add -->
                                 </group>
                             </page>
 
                             <!-- Pestaña 2 -->
                             <page string="Offers">
-                                <group>
-                                    <field name="offer_ids" string="Property Offer"/>
-                                </group>
+                                <!-- <group> -->
+                                <field name="offer_ids" string="Property Offer"/>
+                                <!-- </group> -->
                             </page>
                             
                             <!-- Pestaña 3 -->

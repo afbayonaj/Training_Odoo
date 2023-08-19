@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class EstateProperty(models.Model):
@@ -43,7 +43,24 @@ class EstateProperty(models.Model):
     buyer = fields.Many2one('res.partner', string='Buyer', copy=False, index=True, tracking=True, default=lambda self: self.env.ref('base.partner_root'))
     tag_ids = fields.Many2many("estate.property.tag", string="Tags")
     offer_ids = fields.One2many("estate.property.offer", "property_id", string="Property Offer")
-    #user_id = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True, default=lambda self: self.env.user)
+    
+
+    total_area = fields.Integer(compute='_sum_total_area')
+
+    @api.depends('living_area', 'garden_area')
+    def _sum_total_area(self):
+        for suma in self:
+            suma.total_area = suma.living_area + suma.garden_area
+
+    best_price = fields.Char(default='Hola')
+    # best_price = fields.Float(compute='_max_offer')
+
+    # @api.depends('offer_ids.price')
+    # def _max_offer(self):
+    #     #return max(self.offer_ids.mapped('price'))
+    #     for best in self:
+    #         best.best_price = max(best.offer_ids.mapped('price'))
+    #         #best.best_price = max(best.offer_ids.price)
 
     """
     name = fields.Char('Plan Name', required=True, translate=True)
