@@ -51,15 +51,30 @@ class EstateProperty(models.Model):
     def _sum_total_area(self):
         for suma in self:
             suma.total_area = suma.living_area + suma.garden_area
-            
 
-    best_price = fields.Float(compute='_max_offer')
+
+    best_price = fields.Float(default=0, compute='_max_offer')
 
     @api.depends('offer_ids.price')
     def _max_offer(self):
         for best in self:
             max_price = max(best.offer_ids.mapped('price'))
             best.best_price = max_price
+
+
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        if self.garden:
+            self.garden_area = 10
+            self.garden_orientation = 'north'
+        else:
+            self.garden_area = None
+            self.garden_orientation = None
+
+
+
+
+
 
     """
     name = fields.Char('Plan Name', required=True, translate=True)
