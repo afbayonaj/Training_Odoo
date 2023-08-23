@@ -62,3 +62,8 @@ class EstatePropertyOffer(models.Model):
             if refused.status == 'accepted' or 'None':
                 self.write({'status': 'refused'}) 
         return True
+
+
+    _sql_constraints = [
+        ('check_offer_price', 'CHECK(price >= 0)', 'The offer price can\'t be negative.'),
+    ]

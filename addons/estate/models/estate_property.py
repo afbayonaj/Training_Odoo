@@ -105,19 +105,9 @@ class EstateProperty(models.Model):
         return True
 
 
-
-
-
-
-    """
-    name = fields.Char('Plan Name', required=True, translate=True)
-    number_of_months = fields.Integer('# Months', required=True)
-    active = fields.Boolean('Active', default=True)
-    sequence = fields.Integer('Sequence', default=10)
-    """
-    """    
     _sql_constraints = [
-        ('check_number_of_months', 'CHECK(number_of_months >= 0)', 'The number of month can\'t be negative.'),
+        ('check_property_expected_price', 'CHECK(expected_price >= 0)', 'The property expected price can\'t be negative.'),
+        ('check_property_selling_price', 'CHECK(selling_price >= 0)', 'The property selling price can\'t be negative.'),
+        ('check_property_expected_price', 'CHECK(expected_price >= 0)', 'The property expected price can\'t be negative.'),
     ]
-    """
     
