@@ -39,6 +39,7 @@ class EstatePropertyOffer(models.Model):
                 deadline.validity = False
 
 
+    # Pendiente solo se puede aceptar una oferta por una propiedad determinada!
     def status_accepted(self):
         property_field = self.property_id
         if property_field:
