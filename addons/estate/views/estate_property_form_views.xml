@@ -25,7 +25,7 @@
                             <field name="expected_price" string="Expected Price"/>
                             <field name="best_price" string="Best Offer"/>
                             <field name="selling_price" string="Selling Price"/> 
-                        </group> 
+                        </group>
                     </group>               
                     
 

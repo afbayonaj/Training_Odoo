@@ -37,3 +37,17 @@ class EstatePropertyOffer(models.Model):
                 deadline.validity = validity.date()
             else:
                 deadline.validity = False
+
+
+    def status_accepted(self):
+        for accepted in self:
+            if accepted.status == 'None':
+                accepted.status = 'accepted'
+        return True
+
+
+    def status_refused(self):
+        for refused in self:
+            if refused.status == 'None':
+                refused.status = 'refused'
+        return True
