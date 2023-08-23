@@ -40,14 +40,24 @@ class EstatePropertyOffer(models.Model):
 
 
     def status_accepted(self):
+        property_field = self.property_id
+        if property_field:
+            property_field.write({'selling_price': self.price})
+            property_field.write({'buyer': self.partner_id})
+
         for accepted in self:
-            if accepted.status == 'None':
-                accepted.status = 'accepted'
+            if accepted.status == 'refused' or 'None':
+                self.write({'status': 'accepted'}) 
         return True
 
 
     def status_refused(self):
+        property_field = self.property_id
+        if property_field:
+            property_field.write({'selling_price': 0})
+            property_field.write({'buyer': self.env.ref('base.partner_root')})
+
         for refused in self:
-            if refused.status == 'None':
-                refused.status = 'refused'
+            if refused.status == 'accepted' or 'None':
+                self.write({'status': 'refused'}) 
         return True
