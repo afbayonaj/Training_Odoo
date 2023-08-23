@@ -7,8 +7,8 @@
         <field name="arch" type="xml">
             <form string="Test">
                 <header>
-                    <button name="sold" type="object" string="SOLD" style="background-color: #71639e; color: white;"/>
-                    <button name="cancel" type="object" string="CANCEL" style="background-color: #71639e; color: white;"/>
+                    <button name="property_sold" type="object" string="SOLD" style="background-color: #71639e; color: white;"/>
+                    <button name="property_cancel" type="object" string="CANCEL" style="background-color: #71639e; color: white;"/>
                 </header>
                 <sheet>
                     <h1>My new house</h1>

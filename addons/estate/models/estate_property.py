@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import fields, models, api
+from odoo import fields, models, api, exceptions
 
 
 class EstateProperty(models.Model):
@@ -27,7 +27,12 @@ class EstateProperty(models.Model):
     garden_area = fields.Integer()
     garden_orientation = fields.Selection(
         string='Garden Orientation',
-        selection=[('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')]
+        selection=[
+            ('north', 'North'), 
+            ('south', 'South'), 
+            ('east', 'East'), 
+            ('west', 'West'),
+        ]
     )
     active = fields.Boolean(default=True)
     state = fields.Selection(
@@ -35,7 +40,13 @@ class EstateProperty(models.Model):
         default='new',
         copy=False,
         string='Status',
-        selection=[('new', 'New'), ('offer received', 'Offer Received'), ('offer Accepted', 'Offer Accepted'), ('sold and canceled', 'Sold and Canceled')]
+        selection=[
+            ('new', 'New'), 
+            ('offer received', 'Offer Received'), 
+            ('offer Accepted', 'Offer Accepted'), 
+            ('sold', 'Sold'), 
+            ('canceled', 'Canceled'),
+        ]
     )
     last_seen = fields.Datetime("Last Seen", default=lambda self: fields.Datetime.now())
     property_type_id = fields.Many2one("estate.property.type", string="Property Type")
@@ -70,6 +81,28 @@ class EstateProperty(models.Model):
         else:
             self.garden_area = None
             self.garden_orientation = None
+
+
+    def property_sold(self):
+        for property_state_sold in self:
+            if property_state_sold.state == 'sold':
+                pass
+            elif property_state_sold.state == 'canceled':
+                raise exceptions.UserError("Canceled properties cannot be sold")  # Canceled properties cannot be sold
+            else:
+                property_state_sold.state = 'sold'
+        return True
+
+
+    def property_cancel(self):
+        for property_state_cancel in self:
+            if property_state_cancel.state == 'sold':
+                raise exceptions.UserError("Sold properties cannot be canceled") # Sold properties cannot be canceled
+            elif property_state_cancel.state == 'canceled':
+                pass
+            else:
+                property_state_cancel.state = 'canceled'
+        return True
 
 
 
