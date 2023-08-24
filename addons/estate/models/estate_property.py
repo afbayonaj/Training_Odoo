@@ -2,6 +2,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import fields, models, api, exceptions
+from odoo.exceptions import ValidationError
 
 
 class EstateProperty(models.Model):
@@ -103,6 +104,29 @@ class EstateProperty(models.Model):
             else:
                 property_state_cancel.state = 'canceled'
         return True
+
+
+    @api.constrains('selling_price', 'expected_price')
+    def _validate_selling_price(self):
+        for validate_price in self:
+            if validate_price.selling_price != 0:
+                if validate_price.selling_price < (validate_price.expected_price * 0.9):
+                    raise exceptions.ValidationError(f"The selling price cannot be lower than 90% of the expected price.")
+
+
+    # Si el valor de retorno es -1, significa que el primer valor es menor que el segundo.
+    # Si el valor de retorno es 0, significa que ambos valores son iguales o muy cercanos en términos de precisión.
+    # Si el valor de retorno es 1, significa que el primer valor es mayor que el segundo.
+    # @api.constrains('selling_price', 'expected_price')
+    # def _validate_selling_price(self):
+    #     # if self.float_is_zero('selling_price', precision_rounding=0.01):
+    #     #     pass
+    #     for validation in self:
+    #         # if self.float_is_zero(validation.selling_price, 0.01):
+    #         #     pass
+    #         if self.float_compare(validation.selling_price, validation.expected_price * 0.9, 0.01) == -1:
+    #             raise ValidationError(f"The selling price cannot be lower than 90% of the expected price.")
+    #     return True
 
 
     _sql_constraints = [
