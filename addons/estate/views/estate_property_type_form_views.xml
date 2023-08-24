@@ -7,44 +7,18 @@
         <field name="arch" type="xml">
             <form string="Property Type">
                 <sheet>
-                    <h1>House</h1>
-                    <group>
-                        <group>
-                            <field name="name" string="Name"/>
-                            <field name="date_availability" string="Available From"/>
-                        </group> 
-                        <group>
-                            <field name="expected_price" string="Expected Price"/>
-                            <field name="selling_price" string="Selling Price"/> 
-                        </group> 
-                    </group>               
-                    
-
+                    <h1>House</h1>         
                     <sheet>
                         <notebook>
-                            <!-- Pestaña -->
-                            <page string="Description">
-                                <group>
-                                    <field name="description"/>
-                                    <field name="bedrooms"/>
-                                    <field name="living_area" string="Living Area (sqm)"/>
-                                    <field name="facades"/>
-                                    <field name="garage"/>
-                                    <field name="garden"/>
-                                    <field name="garden_area" string="Garden Area (sqm)"/>
-                                    <field name="garden_orientation"/>
-                                    <field name="state"/> <!-- Este campo no se pide que se muestre -->
-                                </group>
-                            </page>
-                            
-                            <!-- Pestaña 2
-                            <page string="Pestaña 2">
-                                <group>
-                                    <field name="age"/>
-                                    <field name="email"/>
-                                </group>
-                            </page>
-                            -->
+                            <!-- Pestaña 1 -->
+                            <page string="Properties">
+                                <field name="property_ids"/>
+                                    <!-- <tree>
+                                        <field name="name"/>
+                                        <field name="state"/>
+                                        <field name="expected_price"/>
+                                    </tree> -->
+                            </page>   
                         </notebook>
                     </sheet>
                 </sheet>

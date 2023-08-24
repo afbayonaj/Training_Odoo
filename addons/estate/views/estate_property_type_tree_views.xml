@@ -8,6 +8,21 @@
             <tree string="Estate Property Type">
                 <field name="name" string="Name"/>
             </tree>
+
+
+            <!-- <form string="Test">
+                <sheet>
+                    <h1>House</h1>
+                    <notebook>
+                        Pestaña 1
+                        <page string="Properties">
+                            <group>
+                                <field name="name" string="Name"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form> -->
         </field>
     </record>
 
