@@ -7,20 +7,18 @@
         <field name="arch" type="xml">
             <form string="Property Type">
                 <sheet>
-                    <h1>House</h1>         
-                    <sheet>
-                        <notebook>
-                            <!-- Pestaña 1 -->
-                            <page string="Properties">
-                                <field name="property_ids"/>
-                                    <!-- <tree>
-                                        <field name="name"/>
-                                        <field name="state"/>
-                                        <field name="expected_price"/>
-                                    </tree> -->
-                            </page>   
-                        </notebook>
-                    </sheet>
+                    <h1>House</h1> 
+                    <notebook>
+                        <page string="Properties">
+                            <field name="property_ids">
+                                <tree>
+                                    <field name="name" string="Title"/>
+                                    <field name="expected_price"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

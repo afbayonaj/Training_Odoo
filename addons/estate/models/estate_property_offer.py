@@ -9,7 +9,7 @@ class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Real estate offer"
     #_inherit = ['estate.property.offer']
-    #_order = "sequence"
+    _order = "price desc"
     
     price = fields.Float()
     status = fields.Selection(copy=False,  selection=[('accepted', 'Accepted'), ('refused', 'Refused')])

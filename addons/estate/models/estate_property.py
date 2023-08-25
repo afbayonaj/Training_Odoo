@@ -9,7 +9,7 @@ class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real estate services"
     #_inherit = ['estate.property.type']
-    #_order = "sequence"
+    _order = "id desc"
     
     name = fields.Char(required=True, default="Unknown")
     description = fields.Text()
@@ -44,7 +44,7 @@ class EstateProperty(models.Model):
         selection=[
             ('new', 'New'), 
             ('offer received', 'Offer Received'), 
-            ('offer Accepted', 'Offer Accepted'), 
+            ('offer accepted', 'Offer Accepted'), 
             ('sold', 'Sold'), 
             ('canceled', 'Canceled'),
         ]
