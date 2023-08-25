@@ -14,7 +14,8 @@
                 <sheet>
                     <h1>My new house</h1>
                     <field name="name"/> <!-- add --><br/>
-                    <field name="tag_ids" widget="many2many_tags"/>
+                    <!-- <field name="tag_ids" widget="many2many_tags"/> -->
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <group>
                         <group>
                             <!-- <field name="state" string='Status'/> -->
