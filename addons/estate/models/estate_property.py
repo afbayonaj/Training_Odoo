@@ -64,15 +64,14 @@ class EstateProperty(models.Model):
         for suma in self:
             suma.total_area = suma.living_area + suma.garden_area
 
-
+    #best_price = fields.Float(default=0)
     best_price = fields.Float(default=0, compute='_max_offer')
 
     @api.depends('offer_ids.price')
     def _max_offer(self):
-        if self.offer_ids.price != None:
-            for best in self:
-                max_price = max(best.offer_ids.mapped('price'))
-                best.best_price = max_price
+        for best in self:
+            max_price = max(best.offer_ids.mapped('price'))
+            best.best_price = max_price
 
 
     @api.onchange("garden")

@@ -14,7 +14,10 @@
                 <field name="facades"/>
                 <separator/>
                 <filter string="Active" name="active" domain="[('active', '=', False)]"/>
-                <filter string="Available Properties" name="state" domain="['|',('state', '=', 'new'), ('state', '=', 'offer received')]"/>
+                <filter string="Available Properties" 
+                    name="state" 
+                    domain="['|',('state', '=', 'new'), ('state', '=', 'offer received')]"
+                    />
                 <group expand="1" string="Group By">
                     <filter string="Post Code" name="postcode" context="{'group_by':'postcode'}"/>
                 </group>
@@ -26,14 +29,19 @@
         <field name="name">estate.property.tree.views</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree string="Estate Property">
+            <tree string="Estate Property" 
+                decoration-success="state in ('offer received', 'offer accepted')" 
+                decoration-bf="state == 'offer accepted'" 
+                decoration-muted="state == 'sold'"
+                >
                 <field name="name" string="Title"/>
                 <field name="postcode" string="Postcode"/>
                 <field name="bedrooms" string="Bedrooms"/>
                 <field name="living_area" string="Living Area (sqm)"/>
                 <field name="expected_price" string="Expected Price"/>
                 <field name="selling_price" string="Selling Price"/>
-                <field name="date_availability" string="Available From"/>
+                <field name="date_availability" string="Available From" optional="hide"/>
+                <field name="state" invisible="1"/>
             </tree>
         </field>
     </record>

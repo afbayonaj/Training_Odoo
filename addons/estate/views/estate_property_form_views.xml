@@ -7,19 +7,18 @@
         <field name="arch" type="xml">
             <form string="Test">
                 <header>
-                    <button name="property_sold" type="object" string="SOLD" style="background-color: #71639e; color: white;"/>
-                    <button name="property_cancel" type="object" string="CANCEL" style="background-color: #71639e; color: white;"/>
+                    <button name="property_sold" type="object" string="SOLD" style="background-color: #71639e; color: white;" attrs="{'invisible': [('state', 'in', ['refused', 'sold'])]}"/>
+                    <button name="property_cancel" type="object" string="CANCEL" style="background-color: #71639e; color: white;" attrs="{'invisible': [('state', 'in', ['refused', 'sold'])]}"/>
                     <field name="state" widget="statusbar" statusbar_visible="new,offer received,offer accepted,sold,canceled"/>
                 </header>
                 <sheet>
                     <h1>My new house</h1>
                     <field name="name"/> <!-- add --><br/>
-                    <!-- <field name="tag_ids" widget="many2many_tags"/> -->
                     <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <group>
                         <group>
                             <!-- <field name="state" string='Status'/> -->
-                            <field name="property_type_id" string="Property Type"/>
+                            <field name="property_type_id" string="Property Type" options="{'no_create': True}"/>
                             <field name="postcode" string="Postcode"/>
                             <field name="date_availability" string="Available From"/>
                         </group> 
@@ -42,8 +41,8 @@
                                     <field name="facades"/>
                                     <field name="garage"/>
                                     <field name="garden"/>
-                                    <field name="garden_area" string="Garden Area (sqm)"/>
-                                    <field name="garden_orientation"/>
+                                    <field name="garden_area" string="Garden Area (sqm)" attrs="{'invisible': [('garden', '=', False)]}"/>
+                                    <field name="garden_orientation" attrs="{'invisible': [('garden', '=', False)]}"/>
                                     <field name="total_area"/>
                                     <field name="active" string="Active"/> <!-- add -->
                                 </group>
@@ -52,7 +51,7 @@
                             <!-- Pestaña 2 -->
                             <page string="Offers">
                                 <!-- <group> -->
-                                <field name="offer_ids" string="Property Offer"/>
+                                <field name="offer_ids" string="Property Offer" attrs="{'readonly': [('state', 'in', ['offer accepted', 'sold', 'canceled'])]}"/>
                                 <!-- </group> -->
                             </page>
                             
