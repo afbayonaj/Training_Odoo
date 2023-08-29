@@ -65,11 +65,18 @@ class EstatePropertyOffer(models.Model):
         return True
 
 
+    # @api.constrains('price')
+    # def _check_offer_price(self):
+    #     if self.property_id.offer_ids and self.price < min(self.property_id.offer_ids.mapped('price')):
+    #         raise exceptions.ValidationError("Offer amount cannot be less than an existing offer.")
+
+
     @api.model
     def create(self, vals):
         offer = super(EstatePropertyOffer, self).create(vals)
         if offer.property_id:
-            property_record = self.env['estate.property'].browse(offer.property_id.id)._check_offer_price(offer.price)
+            property_record = self.env['estate.property'].browse(offer.property_id.id)
+            #self._check_offer_price()
             property_record.write({'state': 'offer received'})
         return offer
 

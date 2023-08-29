@@ -122,24 +122,6 @@ class EstateProperty(models.Model):
         return super()
 
 
-    # @api.constrains('price', 'property_id')
-    # def _check_offer_price(self):
-    #     for offer in self:
-    #         if offer.property_id and offer.property_id.offer_ids:
-    #             min_price = min(offer.property_id.offer_ids.mapped('price'))
-    #             if offer.price < min_price:
-    #                 raise exceptions.ValidationError("Offer amount cannot be less than an existing offer.")
-
-
-    # @api.model
-    # def _check_offer_price(self, new_price):
-    #     for min_price in self:
-    #         #if self.offer_ids and new_price < min(min_price.offer_ids.mapped('price')):
-    #         if new_price < min(min_price.offer_ids.mapped('price')):    
-    #             raise exceptions.ValidationError("Offer amount cannot be less than an existing offer.")
-    #         return True
-
-
     # Si el valor de retorno es -1, significa que el primer valor es menor que el segundo.
     # Si el valor de retorno es 0, significa que ambos valores son iguales o muy cercanos en términos de precisión.
     # Si el valor de retorno es 1, significa que el primer valor es mayor que el segundo.
