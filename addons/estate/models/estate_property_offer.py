@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import fields, models, api
+from odoo import fields, models, api, exceptions
 from datetime import timedelta
 
 
@@ -18,7 +18,7 @@ class EstatePropertyOffer(models.Model):
     validity = fields.Integer(default=7)
     create_date = fields.Datetime(readonly=True, default=fields.Datetime.now())
     date_deadline = fields.Date(compute='_calculate_deadline', inverse='_inverse_calculate_deadline')
-    property_type_id = fields.Many2one('estate.property.type')
+    property_type_id = fields.Char(related='property_id.property_type_id.name', string='Property Type')
 
     @api.depends('create_date', 'validity')
     def _calculate_deadline(self):
@@ -63,6 +63,15 @@ class EstatePropertyOffer(models.Model):
             if refused.status == 'accepted' or 'None':
                 self.write({'status': 'refused'}) 
         return True
+
+
+    @api.model
+    def create(self, vals):
+        offer = super(EstatePropertyOffer, self).create(vals)
+        if offer.property_id:
+            property_record = self.env['estate.property'].browse(offer.property_id.id)._check_offer_price(offer.price)
+            property_record.write({'state': 'offer received'})
+        return offer
 
 
     _sql_constraints = [

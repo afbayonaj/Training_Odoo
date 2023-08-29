@@ -64,14 +64,14 @@ class EstateProperty(models.Model):
         for suma in self:
             suma.total_area = suma.living_area + suma.garden_area
 
-    #best_price = fields.Float(default=0)
-    best_price = fields.Float(default=0, compute='_max_offer')
+    best_price = fields.Float(default=0)
+    # best_price = fields.Float(default=0, compute='_max_offer')
 
-    @api.depends('offer_ids.price')
-    def _max_offer(self):
-        for best in self:
-            max_price = max(best.offer_ids.mapped('price'))
-            best.best_price = max_price
+    # @api.depends('offer_ids.price')
+    # def _max_offer(self):
+    #     for best in self:
+    #         max_price = max(best.offer_ids.mapped('price'))
+    #         best.best_price = max_price
 
 
     @api.onchange("garden")
@@ -112,6 +112,32 @@ class EstateProperty(models.Model):
             if validate_price.selling_price != 0:
                 if validate_price.selling_price < (validate_price.expected_price * 0.9):
                     raise exceptions.ValidationError(f"The selling price cannot be lower than 90% of the expected price.")
+
+
+    @api.ondelete(at_uninstall='unlink')
+    def _check_property_deletion(self):
+        for property in self:
+            if property.state not in ['new', 'cancel']:
+                raise exceptions.ValidationError("Cannot delete property with state other than 'new' or 'cancel'.")
+        return super()
+
+
+    # @api.constrains('price', 'property_id')
+    # def _check_offer_price(self):
+    #     for offer in self:
+    #         if offer.property_id and offer.property_id.offer_ids:
+    #             min_price = min(offer.property_id.offer_ids.mapped('price'))
+    #             if offer.price < min_price:
+    #                 raise exceptions.ValidationError("Offer amount cannot be less than an existing offer.")
+
+
+    # @api.model
+    # def _check_offer_price(self, new_price):
+    #     for min_price in self:
+    #         #if self.offer_ids and new_price < min(min_price.offer_ids.mapped('price')):
+    #         if new_price < min(min_price.offer_ids.mapped('price')):    
+    #             raise exceptions.ValidationError("Offer amount cannot be less than an existing offer.")
+    #         return True
 
 
     # Si el valor de retorno es -1, significa que el primer valor es menor que el segundo.

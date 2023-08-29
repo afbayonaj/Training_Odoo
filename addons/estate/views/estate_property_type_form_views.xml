@@ -7,6 +7,15 @@
         <field name="arch" type="xml">
             <form string="Property Type">
                 <sheet>
+                    <header>
+                        <button name="offer_count" 
+                        type="object" 
+                        string="Offers" 
+                        style="background-color: #71639e; color: white;" 
+                        icon="fa-line-chart"
+                        oe_stat_button="{'domain': [('property_type_id', '=', 'active_id')]}"
+                        />
+                    </header>
                     <h1>House</h1> 
                     <notebook>
                         <page string="Properties">
