@@ -3,6 +3,7 @@
 
 from odoo import fields, models, api, exceptions
 from odoo.exceptions import ValidationError
+from datetime import timedelta
 
 
 class EstateProperty(models.Model):

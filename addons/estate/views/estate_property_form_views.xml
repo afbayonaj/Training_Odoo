@@ -65,9 +65,6 @@
                             
                         </notebook>
                     </sheet>
-                    <!-- <div>
-                        <button string="Guardar" type="object" name="action_guardar" class="btn-primary"/>
-                    </div> -->
                 </sheet>
             </form>
         </field>
