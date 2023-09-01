@@ -59,14 +59,15 @@
                                 <span class="kanban-label">Expected Price:</span>
                                 <field name="expected_price"/>
                             </div>
-                            <div class="kanban-field">
+                            <div t-if="record.state.raw_value == 'offer received'">
                                 <span class="kanban-label">Best Price:</span>
                                 <field name="best_price"/>
                             </div>
-                            <div class="kanban-field">
+                            <div t-if="record.state.raw_value == 'offer accepted'">
                                 <span class="kanban-label">Selling Price:</span>
                                 <field name="selling_price"/>
                             </div>
+                            <field name="state" invisible="1"/>
                         </div>
                     </t>
                 </templates>
