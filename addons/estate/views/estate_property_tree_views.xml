@@ -25,7 +25,7 @@
         </field>
     </record>
 
-    <!-- <record id="estate_property_tree_view" model="ir.ui.view">
+    <record id="estate_property_tree_view" model="ir.ui.view">
         <field name="name">estate.property.tree.views</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
@@ -44,7 +44,7 @@
                 <field name="state" invisible="1"/>
             </tree>
         </field>
-    </record> -->
+    </record>
 
     <record id="estate_property_kanban_view" model="ir.ui.view">
         <field name="name">estate.property.kanban.views</field>
@@ -54,7 +54,19 @@
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
-                            <field name="name"/>
+                            <h3><field name="name"/></h3>
+                            <div class="kanban-field">
+                                <span class="kanban-label">Expected Price:</span>
+                                <field name="expected_price"/>
+                            </div>
+                            <div class="kanban-field">
+                                <span class="kanban-label">Best Price:</span>
+                                <field name="best_price"/>
+                            </div>
+                            <div class="kanban-field">
+                                <span class="kanban-label">Selling Price:</span>
+                                <field name="selling_price"/>
+                            </div>
                         </div>
                     </t>
                 </templates>
