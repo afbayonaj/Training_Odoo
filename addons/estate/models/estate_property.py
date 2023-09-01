@@ -84,7 +84,7 @@ class EstateProperty(models.Model):
             self.garden_area = None
             self.garden_orientation = None
 
-
+    
     def property_sold(self):
         for property_state_sold in self:
             if property_state_sold.state == 'sold':
