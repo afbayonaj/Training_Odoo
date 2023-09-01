@@ -1,6 +1,6 @@
 {
     'name': "Estate Account",
-    'depends': ['base', 'estate'],
+    'depends': ['base', 'estate', 'account'],
     'application': True,
     # 'data': [
     #     'security/ir.model.access.csv',

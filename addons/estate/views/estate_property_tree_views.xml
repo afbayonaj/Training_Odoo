@@ -25,7 +25,7 @@
         </field>
     </record>
 
-    <record id="estate_property_tree_view" model="ir.ui.view">
+    <!-- <record id="estate_property_tree_view" model="ir.ui.view">
         <field name="name">estate.property.tree.views</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
@@ -43,6 +43,22 @@
                 <field name="date_availability" string="Available From" optional="hide"/>
                 <field name="state" invisible="1"/>
             </tree>
+        </field>
+    </record> -->
+
+    <record id="estate_property_kanban_view" model="ir.ui.view">
+        <field name="name">estate.property.kanban.views</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <field name="name"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 

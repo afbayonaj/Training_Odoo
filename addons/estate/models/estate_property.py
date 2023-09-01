@@ -9,16 +9,12 @@ from datetime import timedelta
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real estate services"
-    #_inherit = ['estate.property.type']
     _order = "id desc"
     
     name = fields.Char(required=True, default="Unknown")
     description = fields.Text()
     postcode = fields.Char()
-    #date_availability = fields.Date(copy=False, default=lambda self: (fields.Datetime.now() + fields.timedelta(days=90)).strftime('%Y-%m-%d'))
-    #date_availability = fields.Date(copy=False, default=lambda self: (fields.Datetime.now() + fields.timedelta(days=90)))
-    #date_availability = fields.Date(copy=False, default=fields.Datetime.now() + fields.timedelta(days=90))
-    date_availability = fields.Date(copy=False, default=lambda self: fields.Datetime.now())
+    date_availability = fields.Date(copy=False, default=lambda self: (fields.Datetime.now() + timedelta(days=90)))
     expected_price = fields.Float(required=True)
     selling_price = fields.Float(copy=False, readonly=True)
     bedrooms = fields.Integer(default=2)
