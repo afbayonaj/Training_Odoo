@@ -2,8 +2,10 @@
     'name': "Real Estate",
     'depends': ['base'],
     'application': True,
+    'category': 'Real Estate/Brokerage',
     'data': [
         'security/ir.model.access.csv',
+        #'security/security.xml'
 
         'views/estate_property_views.xml',
         'views/estate_property_menus.xml',

@@ -8,7 +8,6 @@ from datetime import timedelta
 class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Real estate offer"
-    #_inherit = ['estate.property.offer']
     _order = "price desc"
     
     price = fields.Float()
@@ -32,25 +31,25 @@ class EstatePropertyOffer(models.Model):
 
     def _inverse_calculate_deadline(self):
         for deadline in self:
-            if deadline.create_date and deadline.date_deadline:
-                create_date = fields.Datetime.from_string(deadline.create_date)
-                validity = create_date - timedelta(days=deadline.date_deadline)
-                deadline.validity = validity.date()
-            else:
-                deadline.validity = False
+            if deadline.date_deadline:
+                date_deadline = fields.Date.from_string(deadline.date_deadline)
+                create_date = fields.Date.from_string(fields.Datetime.now())
+                deadline.validity = (date_deadline - create_date).days
 
 
-    # Pendiente solo se puede aceptar una oferta por una propiedad determinada!
     def status_accepted(self):
         property_field = self.property_id
-        if property_field:
-            property_field.write({'selling_price': self.price})
-            property_field.write({'buyer': self.partner_id})
+        if property_field.selling_price == 0:
+            if property_field:
+                property_field.write({'selling_price': self.price})
+                property_field.write({'buyer': self.partner_id})
 
-        for accepted in self:
-            if accepted.status == 'refused' or 'None':
-                self.write({'status': 'accepted'}) 
-        return True
+                for accepted in self:
+                    if accepted.status == 'refused' or 'None':
+                        self.write({'status': 'accepted'}) 
+                return True
+        else:
+            raise exceptions.ValidationError("There is already an accepted offer.")
 
 
     def status_refused(self):

@@ -61,14 +61,17 @@ class EstateProperty(models.Model):
         for suma in self:
             suma.total_area = suma.living_area + suma.garden_area
 
-    best_price = fields.Float(default=0)
-    # best_price = fields.Float(default=0, compute='_max_offer')
 
-    # @api.depends('offer_ids.price')
-    # def _max_offer(self):
-    #     for best in self:
-    #         max_price = max(best.offer_ids.mapped('price'))
-    #         best.best_price = max_price
+    best_price = fields.Float(default=0, compute='_max_offer')
+
+    @api.depends('offer_ids.price')
+    def _max_offer(self):
+        for best in self:
+            if best.offer_ids:
+                best.best_price = max(best.offer_ids.mapped('price'))
+            else:
+                best.best_price = 0
+        return True
 
 
     @api.onchange("garden")
@@ -114,29 +117,26 @@ class EstateProperty(models.Model):
     @api.ondelete(at_uninstall='unlink')
     def _check_property_deletion(self):
         for property in self:
-            if property.state not in ['new', 'cancel']:
-                raise exceptions.ValidationError("Cannot delete property with state other than 'new' or 'cancel'.")
+            if property.state not in ['new', 'canceled']:
+                raise exceptions.ValidationError("Cannot delete property with state other than 'new' or 'canceled'.")
         return super()
 
 
     # Si el valor de retorno es -1, significa que el primer valor es menor que el segundo.
     # Si el valor de retorno es 0, significa que ambos valores son iguales o muy cercanos en términos de precisión.
     # Si el valor de retorno es 1, significa que el primer valor es mayor que el segundo.
+
     # @api.constrains('selling_price', 'expected_price')
     # def _validate_selling_price(self):
-    #     # if self.float_is_zero('selling_price', precision_rounding=0.01):
-    #     #     pass
-    #     for validation in self:
-    #         # if self.float_is_zero(validation.selling_price, 0.01):
-    #         #     pass
-    #         if self.float_compare(validation.selling_price, validation.expected_price * 0.9, 0.01) == -1:
-    #             raise ValidationError(f"The selling price cannot be lower than 90% of the expected price.")
-    #     return True
+    #     if self.selling_price.float_is_zero():
+    #         for validation in self:
+    #             if self.env.float_compare(validation.selling_price, (validation.expected_price * 0.9), 0.01) == -1:
+    #                 raise ValidationError(f"The selling price cannot be lower than 90% of the expected price.")
+    #         return True
 
 
     _sql_constraints = [
         ('check_property_expected_price', 'CHECK(expected_price >= 0)', 'The property expected price can\'t be negative.'),
         ('check_property_selling_price', 'CHECK(selling_price >= 0)', 'The property selling price can\'t be negative.'),
-        ('check_property_expected_price', 'CHECK(expected_price >= 0)', 'The property expected price can\'t be negative.'),
     ]
     

@@ -36,6 +36,7 @@
                 >
                 <field name="name" string="Title"/>
                 <field name="postcode" string="Postcode"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" string="Tags"/>
                 <field name="bedrooms" string="Bedrooms"/>
                 <field name="living_area" string="Living Area (sqm)"/>
                 <field name="expected_price" string="Expected Price"/>
@@ -66,6 +67,10 @@
                             <div t-if="record.state.raw_value == 'offer accepted'">
                                 <span class="kanban-label">Selling Price:</span>
                                 <field name="selling_price"/>
+                            </div>
+                            <div>
+                                <span class="kanban-label">Tags</span>
+                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" string="Tags"/>
                             </div>
                             <field name="state" invisible="1"/>
                             <field name="property_type_id" invisible="1"/>
