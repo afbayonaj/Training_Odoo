@@ -8,22 +8,23 @@
             <form string="Property Type">
                 <sheet>
                     <header>
-                        <button name="offer_count" 
-                        type="object" 
-                        string="Offers" 
-                        style="background-color: #71639e; color: white;" 
-                        icon="fa-line-chart"
-                        oe_stat_button="{'domain': [('property_type_id', '=', 'active_id')]}"
+                        <button class="oe_stat_button"
+                            type="action"
+                            name="%(offers_by_estate_property_type_action)d"
+                            string="Offers"
+                            style="background-color: #71639e; color: white;"
+                            icon="fa-line-chart"
                         />
+                        <br />
                     </header>
-                    <h1>House</h1> 
+                    <h1>House</h1>
                     <notebook>
                         <page string="Properties">
                             <field name="property_ids">
                                 <tree>
-                                    <field name="name" string="Title"/>
-                                    <field name="expected_price"/>
-                                    <field name="state"/>
+                                    <field name="name" string="Title" />
+                                    <field name="expected_price" />
+                                    <field name="state" />
                                 </tree>
                             </field>
                         </page>

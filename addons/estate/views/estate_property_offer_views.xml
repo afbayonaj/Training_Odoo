@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Menu -->
-    <!-- 
+  <!-- Menu -->
+  <!-- 
       id: Se puede utilizar para hacer referencia al registro (sin conocer 
       su identificador en la base de datos).
 
@@ -16,10 +16,10 @@
       las vistas de lista (árbol) y formulario. Veremos más adelante que 
       puede haber otros modos de visualización. 
     -->
-    <record id="estate_property_type_action" model="ir.actions.act_window">
-        <field name="name">Property Types</field>
-        <field name="res_model">estate.property.type</field>
-        <field name="view_mode">tree,form</field>
-    </record>
+  <record id="estate_property_offer_action" model="ir.actions.act_window">
+    <field name="name">Property Offer</field>
+    <field name="res_model">estate.property.offer</field>
+    <field name="view_mode">tree,form</field>
+  </record>
 
 </odoo>

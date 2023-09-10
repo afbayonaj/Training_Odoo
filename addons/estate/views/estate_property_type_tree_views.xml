@@ -6,10 +6,10 @@
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
             <tree string="Estate Property Type">
-                <field name="name" string="Name"/>
-                <field name="sequence" widget="handle"/>
-                <!-- <field name="offer_ids" string="Offers ids"/> -->
-                <!-- <field name="offer_Count" string="Offer Count"/> -->
+                <field name="name" string="Name" />
+                <field name="sequence" widget="handle" />
+                <field name="offer_ids" string="Offers ids" />
+                <field name="offer_count" string="Offer Count" />
             </tree>
         </field>
     </record>
